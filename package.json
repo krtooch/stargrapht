@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "watch": "concurrently --kill-others npm:watch-node-local npm:watch-typescript",
-    "watch-server": "concurrently --kill-others npm:watch-node npm:watch-typescript",
+    "watch": "concurrently --kill-others npm:watch-node npm:watch-typescript",
     "watch-typescript": "tsc -w",
     "watch-node": "nodemon dist/index.js",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "init": "node dist/db/init",
+    "test": "jest"
   },
   "author": "Benoit Chesnais",
   "license": "ISC",
@@ -22,10 +23,13 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.149",
     "apollo-server-koa": "^2.9.16",
     "dataloader": "^2.0.0",
     "graphql": "^14.5.8",
     "knex": "^0.20.7",
-    "nexus": "^0.12.0-rc.5"
+    "lodash": "^4.17.15",
+    "nexus": "^0.12.0-rc.5",
+    "pg": "^7.17.0"
   }
 }
