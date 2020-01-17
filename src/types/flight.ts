@@ -25,51 +25,6 @@ export const Flight = objectType({
     }
   }); 
 
-  // query flight {
-  //   flight(id: 1) {
-  //     id
-  //     code
-  //     launchSite {
-  //       name
-  //       planet {
-  //         name
-  //       }
-  //     }
-  //     landingSite {
-  //       name
-  //       planet {
-  //         name
-  //       }
-  //     }
-  //   }
-  // }
-
-
-  // query flights {
-  //   flights(pageSize: 1, page: 3) {
-  //     pagination {
-  //       total
-  //       page
-  //       pageSize
-  //     }
-  //     nodes {
-  //       id
-  //       code
-  //       launchSite {
-  //         name
-  //         planet {
-  //           name
-  //         }
-  //       }
-  //       landingSite {
-  //         name
-  //         planet {
-  //           name
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 export const FlightsRef = objectType({
   name: "FlightsRef",
   definition(t) {

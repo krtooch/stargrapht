@@ -42,12 +42,12 @@ jobs:
        npm run test
     - name: build
       run: |
-       docker build -t stargrapht:"${{ github.sha }}" .
+       docker build -t stargrapht:latest .
     - name: initPostgre
       run: |
        npm run init
     - name: e2e test
       run: |
-       docker run -p 3000:3000 stagrapht:latest && npm run e2e
+       docker run -p 3000:3000 stargrapht:latest && npm run e2e
 
        

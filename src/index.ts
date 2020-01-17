@@ -1,24 +1,21 @@
 
-
-
+import  { ApolloServer, Request } from "apollo-server-koa";
 import Koa from "koa";
-import  { ApolloServer, Request } from 'apollo-server-koa';
-import { schema } from "./schema.nexus"
-import { auth } from "./lib/auth"
-import * as queries from './lib/queries'
-import {dataloaders} from './lib/dataloaders'
-
+import { auth } from "./lib/auth";
+import {dataloaders} from "./lib/dataloaders";
+import * as queries from "./lib/queries";
+import { schema } from "./schema.nexus";
 
 const server = new ApolloServer({
                         schema,
-                        context: (req) =>{
-                          const user = auth(req.ctx.request.header.authorization)
+                        context: (req) => {
+                          const user = auth(req.ctx.request.header.authorization);
                           return {
                             req,
                             queries,
                             user,
-                            dataloaders : dataloaders()
-                          }
+                            dataloaders : dataloaders(),
+                          };
                         }});
 
 const app = new Koa();
