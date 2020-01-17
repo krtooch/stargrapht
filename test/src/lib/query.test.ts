@@ -1,12 +1,11 @@
-import {getPlanetsByIds} from '../../../src/lib/queries'
+import {getPlanetsByCodes} from '../../../src/lib/queries'
 import sinon from 'sinon'
 import {k} from '../../../src/connection';
 
 
-
-describe('getPlanetsByIds test', ()=>{
+describe('getPlanetsByCodes test', ()=>{
     test('existtest', () => {
-        expect(typeof getPlanetsByIds === 'function').toBe(true)
+        expect(typeof getPlanetsByCodes === 'function').toBe(true)
     })
 
     test('return result returned from knex Function Order as ids array', async ()=>{
@@ -15,7 +14,7 @@ describe('getPlanetsByIds test', ()=>{
                             .withArgs('*')
                             .returnsThis();
         const whereInStub = sinon.stub()
-                            .withArgs('id',[1,2])
+                            .withArgs('code',['toutou','toto'])
                             .resolves(mResponse);
         sinon.stub(k, "from")
             .withArgs('planets')
@@ -25,7 +24,7 @@ describe('getPlanetsByIds test', ()=>{
                 whereIn: whereInStub
             };
             });
-        const actual = await getPlanetsByIds([2,1]);
+        const actual = await getPlanetsByCodes(['toutou','toto']);
         expect(actual).toEqual([mResponse[1],mResponse[0]])
     })
 
