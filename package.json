@@ -10,7 +10,8 @@
     "watch-node": "nodemon dist/src/index.js",
     "start": "node dist/src/index.js",
     "init": "node dist/db/init",
-    "test": "jest"
+    "test": "jest dist/test",
+    "e2e": "jest dist/e2e"
   },
   "author": "Benoit Chesnais",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "@types/lodash": "^4.14.149",
     "@types/sinon": "^7.5.1",
     "apollo-server-koa": "^2.9.16",
+    "axios": "^0.19.1",
     "dataloader": "^2.0.0",
     "graphql": "^14.5.8",
     "knex": "^0.20.7",
