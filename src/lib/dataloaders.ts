@@ -1,3 +1,4 @@
+// @ts-nocheck
 import  Dataloader from 'dataloader'
 import { getPlanetsByCodes, getSpaceCentersByUids, getFlightByCodes} from './queries'
 

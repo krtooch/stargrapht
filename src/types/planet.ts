@@ -3,7 +3,7 @@ import { planet } from '../lib/interfaces';
 
 const resolveSpaceCenters = async (obj : planet, {limit = 3}  : any, ctx :any)=>{
       const uids = await ctx.queries.getSpaceCentersUidByPlanetCode(obj.code, limit)
-      return ctx.dataloaders.spaceCenter.loadMany(uids.map(({uid})=>uid))
+      return ctx.dataloaders.spaceCenter.loadMany(uids.map((data:any)=>data.uid))
     }
 
 
@@ -24,15 +24,3 @@ export const Planet = objectType({
     },
   }); 
   
-//   ```graphql
-//   query planets {
-//     planets {
-//       id
-//       name
-//       code
-//       spaceCenters(limit: 3) {
-//         id
-//       }
-//     }
-//   }
-//   ```

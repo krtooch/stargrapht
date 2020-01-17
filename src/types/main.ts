@@ -1,14 +1,13 @@
 import {queryType, objectType, mutationType, stringArg, intArg, arg} from 'nexus'
-import {ScheduleFlightInput} from './input'
 
 const resolvePlanets = async (_obj : any, _args : any, ctx:any)=>{
    const codes = await  ctx.queries.getPlanetsCodes()
-   return ctx.dataloaders.planet.loadMany(codes.map(({code})=>code))
+   return ctx.dataloaders.planet.loadMany(codes.map((data:{code:string})=>data.code))
 }
 
 const resolveSpaceCenters = async (_obj : any, {page = 1, pageSize= 10} : any, ctx:any)=>{  
   const uids =  await ctx.queries.getSpaceCentersUid(pageSize, (page-1)*pageSize)
-  const nodes=  await ctx.dataloaders.spaceCenter.loadMany(uids.map(({uid})=>uid))
+  const nodes=  await ctx.dataloaders.spaceCenter.loadMany(uids.map((data:{uid:string})=>data.uid))
   return {
           nodes, 
           pagination:{
@@ -23,18 +22,17 @@ const resolveFlights = async (_obj : any, {page = 1, pageSize= 10, from, to, sea
 
 }
 
-const resolveScheduleFlight = async (_obj : any,{flightInfo}, ctx:any)=>{  
-  if (flightInfo.launchSiteId === flightInfo.landingSiteId) throw new Error("No travel between same point")
-  const uid =await ctx.queries.createFlight(flightInfo )
+const resolveScheduleFlight = async (_obj : any, args:{flightInfo:{launchSiteId : number, landingSiteId:number}}, ctx:any)=>{  
+  if (args.flightInfo.launchSiteId === args.flightInfo.landingSiteId) throw new Error("No travel between same point")
+  const uid =await ctx.queries.createFlight(args.flightInfo)
   ctx.dataloaders.flight.clear(uid)
   return ctx.dataloaders.flight.load(uid)
 }
 
 
-const resolveBookFlight = async (_obj : any,{bookingInfo}, ctx:any)=>{  
- // if (flightInfo.launchSiteId === flightInfo.landingSiteId) throw new Error("No travel between same point")
-  const uid =await ctx.queries.createBooking(bookingInfo )
-
+const resolveBookFlight = async (_obj : any,args:any, ctx:any)=>{  
+ await ctx.queries.createBooking(args.bookingInfo )
+  return true
 }
 
 export const Query =queryType({
@@ -124,7 +122,9 @@ export const Pagination = objectType({
     t.int("total", {
       resolve :({total},arg,ctx,info)=>{
         if(total) return total
-        return ctx.queries.tableCount(info.path.prev.prev.key) }   
+         //@ts-ignore
+        return ctx.queries.tableCount(info.path.prev.prev.key)
+      }   
     })
 
     t.int("page")
