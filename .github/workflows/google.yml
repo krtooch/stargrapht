@@ -24,7 +24,7 @@ jobs:
         CI: true
     - name: compile
       run: |
-       tsc --noEmit
+       tsc > null
     - name: test
       run: |
        npm run test
