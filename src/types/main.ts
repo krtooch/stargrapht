@@ -20,7 +20,7 @@ const resolveSpaceCenters = async (_obj : any, {page = 1, pageSize= 10} : any, c
 
 const resolveFlights = async (_obj : any, {page = 1, pageSize= 10, from, to, seatCount, departureDay } : any, ctx:any)=>{  
   const codes =await ctx.queries.getBookingPossibilities( {offset:(page-1)*pageSize, limit :pageSize, from, to, seatCount, departureDay })
-  return ctx.dataloaders.flight.loadMany(codes.map((data:{code:string})=>data.code)))
+  return ctx.dataloaders.flight.loadMany(codes.map((data:{code:string})=>data.code))
 }
 
 const resolveScheduleFlight = async (_obj : any, args:{flightInfo:{launchSiteId : number, landingSiteId:number}}, ctx:any)=>{  
