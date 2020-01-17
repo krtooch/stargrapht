@@ -24,7 +24,7 @@ jobs:
         CI: true
     - name: compile
       run: |
-       tsw
+       tsc
     - name: test
       run: |
        npm run test
