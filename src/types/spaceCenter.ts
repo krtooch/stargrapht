@@ -16,5 +16,15 @@ export const SpaceCenter = objectType({
     },
     
   }); 
+
+
+export const SpaceCentersRef = objectType({
+  name: "SpaceCentersRef",
+  definition(t) {
+    t.field("pagination",{type:'Pagination'});
+    t.list.field('nodes',{type:"SpaceCenter"})
+  },
   
+}); 
+
 

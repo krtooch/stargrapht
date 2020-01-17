@@ -5,12 +5,20 @@ export interface planet {
 } 
 
 export interface spaceCenter {
-    
-
-
-
+    id: number,
+    uid:string,
+    name:string,
+    description:string,
+    latitude:number,
+    longitude:number,
+    planet_code:string
 }
 
-interface flight {
+export interface flight {
+    id : number,
+    code : string,
+    departureAt : Date,
+    launchSiteUid : string,
+    landingSiteUid : string
     
 }

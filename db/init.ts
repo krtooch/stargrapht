@@ -23,6 +23,7 @@ const generateFlights = (): Promise<{ code: string, launchSiteUid: string, landi
                     code: code,
                     launchSiteUid: start.uid,
                     landingSiteUid: end.uid,
+                    reservedSeatCount: 0,
                     seatCount: 100 + random(300),
                     departureAt: new Date(Date.now() + random(30 * 24 * 3600 * 1000))
                 })
@@ -61,9 +62,16 @@ const init = async (): Promise<void> =>
             table.string('launchSiteUid').references('uid').inTable('spaceCenters');
             table.string('landingSiteUid').references('uid').inTable('spaceCenters');
             table.integer('seatCount');
+            table.integer('reservedSeatCount');
             table.timestamp('departureAt');
         })
 
+
+        await t.schema.createTable('bookings', (table: TableBuilder) => {
+            table.increments('id');
+            table.string('email');
+            table.string('flight_code').references('code').inTable('flights');
+        })
         console.log('adding planets')
         await t('planets').insert(planets)
 

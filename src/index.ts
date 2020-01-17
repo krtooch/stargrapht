@@ -17,7 +17,7 @@ const server = new ApolloServer({
                             req,
                             queries,
                             user,
-                           dataloaders : dataloaders()
+                            dataloaders : dataloaders()
                           }
                         }});
 
