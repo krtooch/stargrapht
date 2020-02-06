@@ -50,4 +50,61 @@ jobs:
       run: |
        docker run -p 3000:3000 stargrapht:latest && npm run e2e
 
-       
+       name: Build and Deploy to GKE
+
+# on:
+#   push:
+#     branches:
+#     - master
+
+# # Environment variables available to all jobs and steps in this workflow
+# env:
+#   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+#   GITHUB_SHA: ${{ github.sha }}
+#   IMAGE: stargrapht
+#   GKE_CR_SERVICE: stargrapqht
+
+# jobs:
+#   setup-build-publish-deploy:
+#     name: Setup, Build, Publish, and Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+
+#     - name: Checkout
+#       uses: actions/checkout@master
+
+
+#     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+#       with:
+#         version: '270.0.0'
+#         service_account_key: ${{ secrets.GKE_K }}
+
+#     - run: |
+#         gcloud auth configure-docker
+      
+#     - name: Build test
+#       run: |        
+#         docker build -t testimage:latest \
+#           -f Dockerfile.test .
+      
+#     - name: run test
+#       run: |        
+#         docker run testimage:latest
+
+#     - name: Build
+#       run: |        
+#         docker build -t gcr.io/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+#           -t gcr.io/"$GKE_PROJECT"/"$IMAGE":latest \
+#           -f Dockerfile.prod .
+
+#     - name: Publish
+#       run: |
+#         docker push gcr.io/$GKE_PROJECT/$IMAGE
+
+#     - name: Install beta commands and deploy on cloud run
+#       run: |
+#         gcloud components install beta --quiet && \
+#            gcloud beta run deploy "$GKE_CR_SERVICE" --quiet \
+#           --image gcr.io/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+#           --project "$GKE_PROJECT" --region europe-west1 --platform managed
+        
