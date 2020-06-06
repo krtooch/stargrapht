@@ -26,7 +26,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.149",
     "@types/sinon": "^7.5.1",
-    "apollo-server-koa": "^2.9.16",
+    "apollo-server-koa": "^2.14.2",
     "axios": "^0.19.1",
     "dataloader": "^2.0.0",
     "graphql": "^14.5.8",
